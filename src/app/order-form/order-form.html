@@ -1,0 +1,116 @@
+<div class="container mt-4">
+
+  <h2 class="mb-4">Finaliser la commande</h2>
+
+  <form [formGroup]="orderForm" (ngSubmit)="submitOrder()">
+
+    <div class="row">
+
+      <!-- Prénom -->
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Prénom</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="firstName"
+        />
+        <div
+          class="text-danger"
+          *ngIf="orderForm.get('firstName')?.touched && orderForm.get('firstName')?.invalid"
+        >
+          Prénom requis
+        </div>
+      </div>
+
+      <!-- Nom -->
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Nom</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="lastName"
+        />
+        <div
+          class="text-danger"
+          *ngIf="orderForm.get('lastName')?.touched && orderForm.get('lastName')?.invalid"
+        >
+          Nom requis
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label class="form-label">Adresse email</label>
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        placeholder="ex: client@email.com"
+      />
+      <div
+        class="text-danger"
+        *ngIf="orderForm.get('email')?.touched && orderForm.get('email')?.invalid"
+      >
+        Adresse email invalide
+      </div>
+    </div>
+
+    <!-- Téléphone -->
+    <div class="mb-3">
+      <label class="form-label">Téléphone</label>
+      <input
+        type="tel"
+        class="form-control"
+        formControlName="phone"
+        placeholder="06 12 34 56 78"
+      />
+      <div
+        class="text-danger"
+        *ngIf="orderForm.get('phone')?.touched && orderForm.get('phone')?.invalid"
+      >
+        Numéro de téléphone requis
+      </div>
+    </div>
+
+    <!-- Adresse -->
+    <div class="mb-4">
+      <label class="form-label">Adresse</label>
+      <textarea
+        class="form-control"
+        rows="3"
+        formControlName="address"
+      ></textarea>
+      <div
+        class="text-danger"
+        *ngIf="orderForm.get('address')?.touched && orderForm.get('address')?.invalid"
+      >
+        Adresse requise
+      </div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="d-flex justify-content-between">
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        routerLink="/cart"
+      >
+        Retour au panier
+      </button>
+
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="orderForm.invalid"
+      >
+        Valider la commande
+      </button>
+    </div>
+
+  </form>
+
+</div>
+
+

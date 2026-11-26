@@ -1,0 +1,131 @@
+<div class="container mt-4">
+
+  <app-search-bar-component (search)="filterTrainings($event)"></app-search-bar-component>
+
+  <div class="row mb-3">
+
+  <!-- Catégories -->
+  <div class="col-md-4">
+    <select
+      class="form-select"
+      [(ngModel)]="selectedCategory"
+      (change)="applyFilters()"
+    >
+      <option value="all">Toutes les catégories</option>
+      <option *ngFor="let cat of categories" [value]="cat">
+        {{ cat }}
+      </option>
+    </select>
+  </div>
+
+   <!-- Prix max -->
+  <div class="col-md-4">
+    <input
+      type="number"
+      class="form-control"
+      placeholder="Prix maximum"
+      [(ngModel)]="maxPrice"
+      (input)="applyFilters()"
+    />
+  </div>
+
+  </div>
+
+  <form
+    *ngIf="formVisible"
+    [formGroup]="trainingForm"
+    class="card p-3 mb-4"
+  >
+
+    <h5>{{ isEditing ? 'Modifier' : 'Ajouter' }} une formation</h5>
+
+    <input class="form-control mb-2" placeholder="Nom" formControlName="name" />
+    <input class="form-control mb-2" placeholder="Description" formControlName="description" />
+    <input type="number" class="form-control mb-2" placeholder="Prix" formControlName="price" />
+    <input type="number" class="form-control mb-3" placeholder="Quantité" formControlName="quantity" />
+
+    <select class="form-control mb-3" formControlName="category">
+      <option value="">-- Catégorie --</option>
+      <option>Débutant</option>
+      <option>Intermédiaire</option>
+      <option>Avancé</option>
+    </select>
+
+    <div class="d-flex gap-2">
+      <button class="btn btn-success" type="button" (click)="saveTraining()">
+        {{ isEditing ? 'Mettre à jour' : 'Ajouter' }}
+      </button>
+
+      <button class="btn btn-secondary" type="button" (click)="cancel()">
+
+        Annuler
+      </button>
+    </div>
+
+  </form>
+
+  <!-- <h2 class="mb-3">Liste des formations</h2> -->
+    <button
+      *ngIf="isAdmin"
+      class="btn btn-primary"
+      (click)="openAddForm()"
+    >
+      ➕ Ajouter une formation
+    </button>
+
+  <table class="table table-striped" *ngIf="trainings.length > 0">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>Panier</th>
+        <th *ngIf="isAdmin">Admin</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let training of trainings">
+        <td>{{ training.id }}</td>
+        <td>{{ training.name }}</td>
+        <td>{{ training.description }}</td>
+        <td>{{ training.price }} €</td>
+
+        <td>
+          <input type="number" min="1" class="form-control form-control-sm" style="width: 80px" [(ngModel)]="quantities[training.id]"/>
+        </td>
+        <td>
+          <button
+            class="btn btn-success btn-sm ms-2"
+            (click)="addToCart(training)"
+          >
+            Ajouter
+
+          </button>
+        </td>
+
+        <td>
+
+          <button
+            *ngIf="isAdmin"
+            class="btn btn-warning btn-sme-1"
+            (click)="editTraining(training)"
+          >
+            ✏️ Modifier
+          </button>
+
+          <button
+            *ngIf="isAdmin"
+            class="btn btn-danger btn-sm"
+            (click)="deleteTraining(training.id)"
+          >
+            🗑️ Supprimer
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

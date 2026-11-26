@@ -1,0 +1,71 @@
+<div class="container mt-4">
+
+  <h2>Panier</h2>
+
+  <div *ngIf="orderValidated" class="alert alert-success">
+    Commande validée avec succès 
+  </div>
+
+  <table class="table table-bordered" *ngIf="items.length > 0">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.price }} €</td>
+        <td>
+          <input
+            type="number"
+            min="1"
+            class="form-control form-control-sm"
+            style="width: 80px"
+            [(ngModel)]="item.quantity"
+            (change)="updateQuantity(item)"
+          />
+        </td>
+        <td>{{ item.price * item.quantity }} €</td>
+        <td>
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="removeItem(item.id)"
+          >
+            Supprimer
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="fw-bold">Total : {{ total }} €</p>
+
+  <!--<button
+    class="btn btn-primary"
+    routerLink="/order"
+    (click)="validateOrder()"
+    [disabled]="items.length === 0"
+  >
+    Valider la commande
+  </button>-->
+
+  <p> ===== </p>
+
+  <button
+    class="btn btn-success"
+    (click)="commander()"
+    routerLink="/order"
+    [disabled]="items.length === 0"
+  >
+    Commander
+  </button>
+
+</div>

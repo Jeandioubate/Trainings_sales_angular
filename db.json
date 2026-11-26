@@ -1,0 +1,52 @@
+{
+  "trainings": [
+    {
+      "id": 1,
+      "name": "Java",
+      "description": "Formation Java SE 8 sur 5 jours",
+      "price": 1400,
+      "quantity": 1,
+      "category": "Débutant"
+    },
+    {
+      "id": 2,
+      "name": "Python",
+      "description": "Formation Python/Django 5 jours",
+      "price": 2000,
+      "category": "Avancé",
+      "quantity": 1
+    },
+    {
+      "id": "3",
+      "name": "DotNet",
+      "description": "Formation DotNet 3 jours",
+      "price": 1000,
+      "quantity": 1,
+      "category": "Intermédiaire"
+    },
+    {
+      "id": "4",
+      "name": "Angular",
+      "description": "Développement web/front end 15 jours",
+      "price": 3500,
+      "quantity": 1,
+      "category": "Avancé"
+    },
+    {
+      "id": "5",
+      "name": "Htlm & CSS",
+      "description": "Construction page web 10 jours",
+      "price": 2500,
+      "quantity": 1,
+      "category": "Débutant"
+    },
+    {
+      "id": "6",
+      "name": "Api Rest",
+      "description": "Formation Postman, Insomnia 20 jours",
+      "price": 3000,
+      "quantity": 1,
+      "category": "Intermédiaire"
+    }
+  ]
+}
